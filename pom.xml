@@ -13,6 +13,7 @@
       <maven.compiler.target>11</maven.compiler.target>
 
       <junit.version>5.7.1</junit.version>
+      <kafka.testcontainers.version>1.15.2</kafka.testcontainers.version>
    </properties>
 
    <dependencies>
@@ -21,6 +22,12 @@
          <groupId>org.junit.jupiter</groupId>
          <artifactId>junit-jupiter-api</artifactId>
          <version>${junit.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.testcontainers</groupId>
+         <artifactId>kafka</artifactId>
+         <version>${kafka.testcontainers.version}</version>
          <scope>test</scope>
       </dependency>
 
