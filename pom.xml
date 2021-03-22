@@ -14,10 +14,11 @@
 
       <junit.version>5.7.1</junit.version>
       <testcontainers.version>1.15.2</testcontainers.version>
-      <spring.version>5.3.4</spring.version>
+      <spring.boot.version>2.4.4</spring.boot.version>
       <kafka.clients.version>2.7.0</kafka.clients.version>
       <lombok.version>1.18.18</lombok.version>
       <awaitility.version>4.0.3</awaitility.version>
+      <assertj.version>3.19.0</assertj.version>
    </properties>
 
    <dependencies>
@@ -41,11 +42,11 @@
          <version>${testcontainers.version}</version>
       </dependency>
 
-      <!--  Spring dependencies  -->
+      <!--  SpringBoot dependencies  -->
       <dependency>
-         <groupId>org.springframework</groupId>
-         <artifactId>spring-context</artifactId>
-         <version>${spring.version}</version>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-test</artifactId>
+         <version>${spring.boot.version}</version>
       </dependency>
 
       <!--  Kafka  -->
@@ -67,5 +68,12 @@
          <artifactId>awaitility</artifactId>
          <version>${awaitility.version}</version>
       </dependency>
+      <dependency>
+         <groupId>org.assertj</groupId>
+         <artifactId>assertj-core</artifactId>
+         <version>${assertj.version}</version>
+         <scope>test</scope>
+      </dependency>
+
    </dependencies>
 </project>

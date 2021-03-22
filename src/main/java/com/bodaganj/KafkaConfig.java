@@ -1,6 +1,5 @@
 package com.bodaganj;
 
-import com.bodaganj.containers.schema.SchemaRegistryContainer;
 import com.bodaganj.containers.zk.ZookeeperContainer;
 import com.bodaganj.kafka.helper.KafkaTestHelper;
 import com.bodaganj.kafka.helper.consumer.ConsumerProperties;
@@ -11,9 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.test.context.ContextConfiguration;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.containers.Network;
 import org.testcontainers.lifecycle.Startables;
@@ -23,6 +24,7 @@ import java.util.stream.Stream;
 
 @Slf4j
 @Configuration
+@ContextConfiguration(initializers = ConfigDataApplicationContextInitializer.class)
 public class KafkaConfig {
 
    private final String confluentVersion = "5.2.1";
@@ -45,16 +47,9 @@ public class KafkaConfig {
       return zookeeperContainer;
    }
 
-   @Bean
-   public SchemaRegistryContainer schemaRegistryContainer() {
-      SchemaRegistryContainer schemaRegistryContainer = new SchemaRegistryContainer();
-      Startables.deepStart(Stream.of(schemaRegistryContainer)).join();
-      return schemaRegistryContainer;
-   }
-
    @Lazy
    @Bean(destroyMethod = "close")
-   KafkaTestHelper<String> kafkaTestHelper(KafkaContainer kafkaContainer, @Value("${kafka.topic}") String topic) {
+   public KafkaTestHelper<String> kafkaTestHelper(KafkaContainer kafkaContainer, @Value("${kafka.topic}") String topic) {
       log.info("Creating KafkaTestHelper...");
       return new KafkaTestHelper<>(
          KafkaTestProducerFactory.create(
