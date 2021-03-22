@@ -3,10 +3,9 @@
 The following flow is implemented within the test:
 
 1. Start kafka containers
-   1. Start schema registry
-   2. Start ZK
-   3. Start kafka
-2. Generate avro file
-3. Send avro file to dockerized kafka
-4. Consume avro file from dockerized kafka
+   1. Start ZK
+   2. Start kafka
+2. Generate string message
+3. Send string message to dockerized kafka
+4. Consume string message from dockerized kafka
 5. Profit 
